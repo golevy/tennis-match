@@ -1,0 +1,39 @@
+<view bindtap="showModal" data-target="Modal" data-id="{{item._id}}" wx:for="{{games}}" wx:key="_id" class="item-container margin-bottom">
+  <view class="flex align-center">
+    <image mode="aspectFill" class="host-avatar" src="{{item.participants[0].avatarUrl}}"></image>
+    <view class="title margin-left-sm single-line">{{item.dayOfWeek}}, {{item.location.name}}</view>
+    <view class="reminder" wx:if="{{item.isUpcoming}}">即将开始</view>
+  </view>
+  <view class="flex margin-top">
+    <image src="/images/ic_location.png" class="icon" style="min-width: 32rpx" />
+    <text class="margin-left-xs location">{{item.location.name}}</text>
+  </view>
+  <view class="flex margin-top-xs">
+    <image src="/images/ic_time.png" class="icon" />
+    <text class="margin-left-xs time">{{item.startDateStr}}</text>
+    <text class="margin-left-xs time">- {{item.endDateStr}}</text>
+  </view>
+  <view class="flex margin-top-xs">
+    <image src="/images/ic_level.png" class="icon" />
+    <text class="margin-left-xs level">Level {{item.level}}+</text>
+  </view>
+  <view class="flex margin-top-lg align-center">
+    <image src="{{participant.avatarUrl}}" class="participantAvatar margin-right-sm" wx:for-item="participant" wx:for-index="avatar-index" wx:for="{{item.participants}}" wx:key="_id" mode="aspectFill"></image>
+    <view class="flex align-end" hover-class="none" hover-stop-propagation="false">
+      <view class="participantCount margin-left-sm">{{item.participants.length}}</view>
+      <view class="maxParticipantCount">/{{item.maxParticipantCount}}</view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{ gameId === '' ? '' : 'show' }}">
+  <view class="cu-dialog" style="width: 100%">
+    <view class="cu-bar justify-end">
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-green"></text>
+      </view>
+    </view>
+    <view wx:if="{{selectedItem !== ''}}">
+      <gamedetail gameId="{{ gameId === '' ? selectedItem : gameId }}"></gamedetail>
+    </view>
+  </view>
+</view>

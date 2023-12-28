@@ -1,0 +1,15 @@
+<view class="container">
+    <!-- Canvas Box -->
+    <view class="share-card">
+        <canvas canvas-id="canvas" class="canvas" style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"></canvas>
+    </view>
+    <!-- Poster -->
+    <view class="dialog-wrapper poster-dialog {{showPoster ? 'active' : ''}}">
+        <view class="poster-box">
+            <image src="{{tempShareImg}}" mode="widthFix" alt=""></image>
+        </view>
+        <button class="btn-close" bindtap="closePoster">
+            <image style="width: 84rpx;height:84rpx" mode="aspectFit" src="/images/close.png"></image>
+        </button>
+    </view>
+</view>

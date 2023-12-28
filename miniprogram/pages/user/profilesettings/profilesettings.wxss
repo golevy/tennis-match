@@ -1,0 +1,174 @@
+page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  padding-top: 160rpx;
+}
+.avatar,
+.avatar-upload {
+  width: 200rpx !important;
+  height: 200rpx !important;
+  font-weight: normal !important;
+  border-radius: 50%;
+  padding: 0 !important;
+}
+.avatar-upload {
+  background: #323232;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #888888;
+  font-size: 28rpx;
+}
+.form {
+  width: 80%;
+}
+.form .section-title {
+  color: #727272;
+  font-size: 28rpx;
+}
+.form .inp-nickname {
+  width: 510rpx;
+  border-bottom: 3rpx solid #c8c8c8;
+  color: #888888;
+  font-size: 28rpx;
+  line-height: 28rpx;
+}
+.form .inp-court {
+  width: 375rpx;
+  border-bottom: 3rpx solid #c8c8c8;
+  color: #888888;
+  font-size: 28rpx;
+  line-height: 28rpx;
+}
+.form .inp-club {
+  width: 349rpx;
+  border-bottom: 3rpx solid #c8c8c8;
+  color: #888888;
+  font-size: 28rpx;
+  line-height: 28rpx;
+}
+.form .gender-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.form .gender-text {
+  color: #888888;
+  font-size: 28rpx;
+}
+.form .day-text {
+  font-size: 24rpx;
+  color: #fff;
+}
+.form .time-text {
+  color: #b8b8b8;
+  font-size: 24rpx;
+}
+.form .time-text-active {
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+.form .gender-other {
+  background: linear-gradient(135.78deg, #1bef17 0%, #1c3aa4 91.59%);
+}
+.form .icon-gender {
+  width: 40rpx;
+  height: 40rpx;
+}
+.form .icon-day {
+  width: 28rpx;
+  height: 28rpx;
+}
+.form .icon-time {
+  width: 36rpx;
+  height: 36rpx;
+}
+.form .submit-button {
+  border-radius: 9999rpx;
+  background: var(--action);
+  padding: 20rpx 28rpx;
+  font-weight: bold;
+  color: black;
+  width: 50% !important;
+  margin-top: 80rpx;
+}
+.form .picker {
+  color: #999999;
+}
+.form .textarea {
+  width: 100%;
+  height: 120rpx;
+  background: #2f2f2f;
+  color: #c8c8c8;
+  padding: 10rpx;
+}
+.input-placeholder {
+  color: #575757;
+  font-size: 29rpx;
+}
+.mt-10 {
+  margin-top: 10rpx;
+}
+.mt-court {
+  margin-top: 80rpx;
+}
+.mt-club {
+  margin-top: 90rpx;
+}
+.mt-time {
+  margin-top: 70rpx;
+}
+.mt-intro {
+  margin-top: 85rpx;
+}
+.ml-4 {
+  margin-left: 12rpx;
+}
+.ml-weekend {
+  margin-left: 156rpx;
+}
+.ml-2 {
+  margin-left: 8rpx;
+}
+.mr-12 {
+  margin-right: 48rpx;
+}
+.mr-time {
+  margin-right: 48rpx;
+}
+.mr-120 {
+  margin-right: 120rpx;
+}
+.mr-time-night {
+  margin-right: 56rpx;
+}
+checkbox {
+  width: 32rpx;
+  height: 32rpx;
+  position: relative;
+  bottom: 2rpx;
+}
+checkbox .wx-checkbox-input {
+  width: 32rpx;
+  height: 32rpx;
+  background-color: #323232;
+  border: #323232;
+}
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  background: #ddf24c !important;
+}
+checkbox::before {
+  font-family: "cuIcon";
+  content: "\e645";
+  position: absolute;
+  color: #222 !important;
+  top: 50%;
+  margin-top: -6px;
+  right: 2px;
+  font-size: 24rpx;
+  z-index: 9;
+}

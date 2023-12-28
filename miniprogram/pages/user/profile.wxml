@@ -1,0 +1,187 @@
+<view class="content">
+  <!-- Header Section -->
+  <view class="background">
+    <image class="background-img" src="{{ userInfo.avatarUrl }}" mode="aspectFill" />
+    <view wx:if="{{ userFeatureEnabled }}" class="functions flex flex-row align-center flex-end">
+      <view wx:if="{{!userId}}" bindtap="openQR_Code" class="function flex justify-center align-center">
+        <image class="function-icon" src="/images/ic_QR.svg" />
+      </view>
+      <button class="function flex justify-center align-center" open-type="share">
+        <image class="function-icon" src="/images/ic_share.svg" />
+      </button>
+      <view wx:if="{{!userId}}" class="function flex justify-center align-center" bindtap="handleSettingClick">
+        <image class="function-icon" src="/images/ic_settings.svg" />
+      </view>
+    </view>
+    <view class="header flex flex-row align-center">
+      <view class="avatar">
+        <image class="image-avatar" src="{{ userInfo.avatarUrl }}" mode="aspectFill" bindtap="handlePreviewAvatar" />
+      </view>
+      <view class="info flex flex-col justify-around">
+        <view class="info-name">
+          <text class="text-nickname">{{ userInfo.nickname }}</text>
+          <image wx:if="{{ userInfo.gender === 'female' }}" class="image-gender" src="/images/ic_marker_female.png" />
+          <image wx:if="{{ userInfo.gender === 'male' }}" class="image-gender" src="/images/ic_marker_male.png" />
+        </view>
+        <view class="flex">
+          <view class="info-level">
+            <image class="icon-desc" src="/images/ic_level.svg" />
+            <text class="text-bold">NTRP {{ userInfo.level }}</text>
+          </view>
+          <view class="info-distance" wx:if="{{ distance }}">
+            <image class="icon-desc" src="/images/ic_distance.svg" />
+            <text class="text-bold">{{ distance }} km</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="main">
+    <view class="title flex flex-row align-center justify-center" wx:if="{{ userInfo.activeTimestamps.length > 0 || userInfo._id === selfUserId}}">
+      <view class="{{ activeTab === 'info' ? 'title-text-active' : '' }} title-text" bindtap="switchTab" data-tabid="info">
+        个人信息
+      </view>
+      <view wx:if="{{ userInfo.activeTimestamps.length > 0 || userInfo._id === selfUserId}}" class="{{ activeTab === 'record' ? 'title-text-active' : '' }} title-text" bindtap="switchTab" data-tabid="record">
+        打球记录
+      </view>
+      <view hidden="{{ true }}" class="{{ activeTab === 'remark' ? 'title-text-active' : '' }} title-text" bindtap="switchTab" data-tabid="remark" wx:if="{{ userInfo._id === selfUserId }}">
+        笔记
+      </view>
+    </view>
+    <view wx:if="{{ activeTab === 'info' }}">
+      <view class="section-title">常打时间</view>
+      <view class="section-content" wx:if="{{ userInfo.availableWorkday && userInfo.workdayAvailability && userInfo.availableWeekend && userInfo.weekendAvailability }}">
+        {{userInfo.availableWorkday}}{{userInfo.workdayAvailability}}，{{userInfo.availableWeekend}}{{userInfo.weekendAvailability}}
+      </view>
+      <view class="section-content" wx:elif="{{ userInfo.availableWorkday && userInfo.workdayAvailability }}">
+        {{userInfo.availableWorkday}}{{userInfo.workdayAvailability}}
+      </view>
+      <view class="section-content" wx:elif="{{ userInfo.availableWeekend && userInfo.weekendAvailability }}">
+        {{userInfo.availableWeekend}}{{userInfo.weekendAvailability}}
+      </view>
+      <view class="section-content" wx:else>用户暂未填写~</view>
+      <view class="section-title">常住地</view>
+      <view class="section-content" wx:if="{{ userInfo.residence }}">{{ userInfo.residence }}</view>
+      <view class="section-content" wx:else>用户暂未填写~</view>
+      <view class="section-title">常去球场</view>
+      <view class="section-content" wx:if="{{ userInfo.court }}">{{ userInfo.court }}</view>
+      <view class="section-content" wx:else>用户暂未填写~</view>
+      <view class="section-title">所属俱乐部</view>
+      <view class="section-content" wx:if="{{ userInfo.club }}">{{ userInfo.club }}</view>
+      <view class="section-content" wx:else>用户暂未填写~</view>
+      <view class="section-title">个人简介</view>
+      <view class="section-content" wx:if="{{ userInfo.introduction }}">
+        {{ userInfo.introduction }}
+      </view>
+      <view class="section-content" wx:else>这个人很懒，什么都没有留下~</view>
+    </view>
+    <view wx:if="{{ activeTab === 'record' }}">
+      <block wx:if="{{userInfo.activeTimestamps.length > 0}}">
+        <view class="section-title">10天内打过</view>
+        <view class="section-content">{{ userInfo.isWithinTenDays ? "是" : "否" }}</view>
+        <view class="section-title">最近打球场地</view>
+        <view class="section-content" wx:if="{{ userInfo.court }}">{{ userInfo.court }}</view>
+        <view class="section-content" wx:else>用户近期暂未打球~</view>
+        <view class="section-title">最近打球球友</view>
+        <view class="section-content" wx:if="{{ tennisPlayersInfo.length > 0}}">
+          <image data-id="{{item._id}}" bindtap="handleViewUserProfile" wx:for="{{tennisPlayersInfo}}" wx:key="index" class="avatarUrl" src="{{ item.avatarUrl }}" mode="aspectFill" />
+        </view>
+        <view class="section-content" wx:else>—</view>
+        <view class="section-title">{{ userInfo.nickname }}的活动记录</view>
+        <canvas class="myCanva margin-top" style="width: 624rpx;" type="2d"></canvas>
+      </block>
+      <block wx:else>
+        <view class="no-tennis-record flex flex-col justify-between align-center">
+          <image style="width: 128rpx; height: 128rpx;" src="/images/ic_nulltennis_record.svg"></image>
+          <view class="flex flex-col align-center">
+            <view class="caption">还没有打球记录</view>
+            <view class="sub-title margin-top-xs">参与过附近的组局后打球记录会在这里自动生成你</view>
+            <view class="sub-title">的打球记录，速来提高你的球技吧！</view>
+          </view>
+          <button bindtap="exploreGame" class="explore-btn">查看附近的球局</button>
+        </view>
+      </block>
+    </view>
+  </view>
+  <!-- Feedback Section -->
+  <view wx:if="{{!userId && activeTab !== 'record' && userFeatureEnabled}}" class="feedback flex align-center" bindtap="navigateToFeedback">
+    <image class="image-feedback" src="/images/ic_review.svg" />
+    <view class="text-feedback">我要反馈</view>
+  </view>
+</view>
+<!-- QR_code Modal -->
+<van-dialog width="90vw" use-slot show="{{ showQR_code }}" bind:close="onClose" showConfirmButton="{{false}}" custom-class="my-custom-class" closeOnClickOverlay="{{true}}">
+  <view class="info-card" style="width: 100%;">
+    <view class="flex flex-row align-center">
+      <view class="avatar">
+        <image class="image-avatar" src="{{ userInfo.avatarUrl }}" mode="aspectFill" />
+      </view>
+      <view class="info flex flex-col justify-around">
+        <view class="info-name">
+          <text class="text-nickname">{{ userInfo.nickname }}</text>
+        </view>
+        <view class="info-level">
+          <image class="icon-desc" src="/images/ic_level.svg" />
+          <text>NTRP {{ userInfo.level }}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{ userInfo.introduction }}">
+      <view class="section-content introduction">{{ userInfo.introduction }}</view>
+    </view>
+    <view class="section-title">常打时间</view>
+    <view class="section-content" wx:if="{{ userInfo.availableWorkday && userInfo.workdayAvailability && userInfo.availableWeekend && userInfo.weekendAvailability }}">
+      {{userInfo.availableWorkday}}{{userInfo.workdayAvailability}}，{{userInfo.availableWeekend}}{{userInfo.weekendAvailability}}
+    </view>
+    <view class="section-content" wx:elif="{{ userInfo.availableWorkday && userInfo.workdayAvailability }}">
+      {{userInfo.availableWorkday}}{{userInfo.workdayAvailability}}
+    </view>
+    <view class="section-content" wx:elif="{{ userInfo.availableWeekend && userInfo.weekendAvailability }}">
+      {{userInfo.availableWeekend}}{{userInfo.weekendAvailability}}
+    </view>
+    <view class="section-content" wx:else>用户暂未填写~</view>
+    <view wx:if="{{ userInfo.court }}">
+      <view class="section-title">常去球场</view>
+      <view class="section-content">{{ userInfo.court }}</view>
+    </view>
+    <view wx:elif="{{ userInfo.club }}">
+      <view class="section-title">所属俱乐部</view>
+      <view class="section-content">{{ userInfo.club }}</view>
+    </view>
+    <view class="share-QR_code flex justify-between">
+      <view class="left flex flex-col justify-around">
+        <image style="width: 54rpx; height: 54rpx;" src="../../images/logo.svg"></image>
+        <view style="color: var(--Very-Dark-Grey, #151515); font-size: 24rpx;">
+          <view>扫一扫或长按二维码，</view>
+          <view>来也球找我约球</view>
+        </view>
+      </view>
+      <view class="right">
+        <image bindtap="previewImage" mode="aspectFill" style="width: 200rpx; height: 200rpx;" src="../../images/miniprogram_code.jpg"></image>
+      </view>
+    </view>
+  </view>
+  <text bindtap="onClose" class="cuIcon-close lg"></text>
+</van-dialog>
+<view wx:if="{{showQR_code}}" class="btns flex animation-scale">
+  <button bindtap="handleSaveCard">
+    <image class="icon-share-card" src="../../images/ic_save.svg"></image>
+    <text>保存</text>
+  </button>
+  <button open-type="share">
+    <image class="icon-share-card" src="../../images/ic_share.svg"></image>
+    <text>分享主页</text>
+  </button>
+</view>
+<view class="container">
+  <!-- canvas盒子 -->
+  <view class="share-card">
+    <canvas canvas-id="canvas" class="canvas" style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"></canvas>
+  </view>
+  <!-- poster -->
+  <view class="dialog-wrapper poster-dialog {{showPoster ? 'active' : ''}}" catchtouchmove='preD'>
+    <view class="poster-box">
+      <image src="{{tempShareImg}}" mode="widthFix" alt=""></image>
+    </view>
+  </view>
+</view>

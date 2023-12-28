@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "home": "/pages/home/home",
+    "user": "/pages/user/profile",
+    "explore": "/pages/explore/explore",
+    "message": "/pages/message/message",
+    "privacy": "/components/privacy/privacy"
+  }
+}

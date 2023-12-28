@@ -1,0 +1,120 @@
+<view>
+  <button bindtap="handleAvatarChoosen" class="avatar-upload">
+    <text wx:if="{{ !avatarUrl }}">点击上传头像</text>
+    <image wx:if="{{ avatarUrl }}" class="avatar" src="{{ avatarUrl }}" mode="aspectFill"></image>
+  </button>
+</view>
+<form class="padding margin-top-lg form" bindsubmit="handleSubmit">
+  <!-- Nickname -->
+  <view class="flex flex-row align-center justify-between margin-top-sm">
+    <view class="section-title">昵称</view>
+    <input maxlength="50" bindinput="handleNicknameChange" name="nickname" class="inp-nickname" value="{{ nickname }}"></input>
+  </view>
+  <!-- Level -->
+  <view class="flex flex-row align-center justify-between margin-top-sm">
+    <view class="section-title margin-top-xl margin-bottom-xl">段位</view>
+    <levelSlider style="width: 510rpx;" tennisLevel="{{level}}" bind:levelChange="handleLevelChange"></levelSlider>
+  </view>
+  <!-- Gender -->
+  <view class="flex justify-between align-center margin-top-sm">
+    <view class="section-title">性别</view>
+    <view class="flex align-center">
+      <view bindtap="handleGenderSelect" data-gender="male" class="flex flex-col align-center">
+        <view class="flex gender-text align-center">
+          <image src="../../../images/ic_male_active.svg" class="icon-gender" wx:if="{{ gender === 'male' }}" />
+          <image src="../../../images/ic_male.svg" class="icon-gender" wx:else />
+          <text class="{{gender === 'male' ? 'text-bold' : ''}} ml-2">男生</text>
+        </view>
+      </view>
+      <view bindtap="handleGenderSelect" data-gender="female" class="flex flex-col align-center margin-left-lg">
+        <view class="flex gender-text align-center">
+          <image src="../../../images/ic_female_active.svg" class="icon-gender" wx:if="{{ gender === 'female' }}" />
+          <image src="../../../images/ic_female.svg" class="icon-gender" wx:else />
+          <text class="{{gender === 'female' ? 'text-bold' : ''}} ml-2">女生</text>
+        </view>
+      </view>
+      <view bindtap="handleGenderSelect" data-gender="other" class="flex flex-col align-center margin-left-lg mr-120">
+        <view class="flex gender-text align-center">
+          <image src="../../../images/ic_other_active.svg" class="icon-gender" wx:if="{{ gender === 'other' }}" />
+          <image src="../../../images/ic_other.svg" class="icon-gender" wx:else />
+          <text class="{{gender === 'other' ? 'text-bold' : ''}} ml-2">其他</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- Availability -->
+  <view class="flex flex-row align-center justify-between mt-time">
+    <view class="section-title mr-time">常打时间</view>
+    <view class="flex align-center justify-between flex-1">
+      <view class="flex align-center">
+        <checkbox-group bindchange="handleWorkdayCheckboxChange">
+          <block wx:for="{{ workday }}" wx:key="index">
+            <checkbox value="{{ item.value }}" checked="{{ item.checked }}" />
+          </block>
+        </checkbox-group>
+        <text class="day-text ml-4">工作日</text>
+      </view>
+      <view class="flex flex-row align-center" bindtap="handleWorkdayTimeSelect" data-workday="daylight">
+        <image class="icon-time" src="../../../images/ic_sun_active.svg" wx:if="{{ workdayDaylightSelected }}" />
+        <image class="icon-time" src="../../../images/ic_sun.svg" wx:else />
+        <view class="{{ workdayDaylightSelected ? 'time-text-active' : 'time-text' }} ml-2">
+          白天
+        </view>
+      </view>
+      <view class="flex flex-row align-center" bindtap="handleWorkdayTimeSelect" data-workday="night">
+        <image class="icon-time" src="../../../images/ic_night_active.svg" wx:if="{{ workdayNightSelected }}" />
+        <image class="icon-time" src="../../../images/ic_night.svg" wx:else />
+        <view class="{{ workdayNightSelected ? 'time-text-active' : 'time-text' }} ml-2 mr-time-night">
+          晚上
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="flex flex-row align-center margin-top-xl justify-between">
+    <view class="flex align-center justify-between flex-1 ml-weekend">
+      <view class="flex align-center flex-row justify-center">
+        <checkbox-group bindchange="handleWeekendCheckboxChange">
+          <block wx:for="{{ weekend }}" wx:key="index">
+            <checkbox value="{{ item.value }}" checked="{{ item.checked }}" />
+          </block>
+        </checkbox-group>
+        <view class="day-text ml-4">周末</view>
+      </view>
+      <view class="flex flex-row align-center" bindtap="handleWeekendTimeSelect" data-weekend="daylight">
+        <image class="icon-time" src="../../../images/ic_sun_active.svg" wx:if="{{ weekendDaylightSelected }}" />
+        <image class="icon-time" src="../../../images/ic_sun.svg" wx:else />
+        <view class="{{ weekendDaylightSelected ? 'time-text-active' : 'time-text' }} ml-2">
+          白天
+        </view>
+      </view>
+      <view class="flex flex-row align-center" bindtap="handleWeekendTimeSelect" data-weekend="night">
+        <image class="icon-time" src="../../../images/ic_night_active.svg" wx:if="{{ weekendNightSelected }}" />
+        <image class="icon-time" src="../../../images/ic_night.svg" wx:else />
+        <view class="{{ weekendNightSelected ? 'time-text-active' : 'time-text' }} ml-2 mr-time-night">
+          晚上
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- Residence -->
+  <view class="flex flex-row align-center justify-between mt-court">
+    <view class="section-title">常住地</view>
+    <input type="text" bindinput="handleResidenceChange" placeholder="国家·城市" maxlength="20" class="inp-court" name="residence" value="{{ residence }}" />
+  </view>
+  <!-- Court -->
+  <view class="flex flex-row align-center justify-between mt-court">
+    <view class="section-title">常去球场（选填）</view>
+    <input type="text" bindinput="handleCourtChange" placeholder="请填写常去球场吧~" maxlength="20" class="inp-court" name="court" value="{{ court }}" />
+  </view>
+  <!-- Club -->
+  <view class="flex flex-row align-center justify-between mt-club">
+    <view class="section-title">所属俱乐部（选填）</view>
+    <input type="text" bindinput="handleClubChange" placeholder="请填写所属俱乐部吧~" maxlength="20" class="inp-club" name="club" value="{{ club }}" />
+  </view>
+  <!-- Introduction -->
+  <view class="mt-intro">
+    <view class="section-title">个人简介（选填）</view>
+    <textarea type="text" bindinput="handleIntroductionChange" placeholder="简单介绍下自己吧~" class="margin-top-sm textarea" name="introduction" value="{{ introduction }}" />
+  </view>
+  <button class="submit-button" form-type="submit">完成</button>
+</form>

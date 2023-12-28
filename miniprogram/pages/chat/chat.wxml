@@ -1,0 +1,69 @@
+<view class="content">
+  <toolbar isBack="true">
+    <view slot="backText" class="text-white">{{ receiverInfo.nickname }}</view>
+  </toolbar>
+  <block wx:if="{{ chatData.length > 0 }}">
+    <view class="main" wx:for="{{ chatData[0].messages }}" wx:key="sendTime">
+      <view class="other flex" wx:if="{{ item.senderId === receiverId }}">
+        <image class="user-img-left" bindtap="handleViewUserInfo" src="{{ receiverInfo.avatarUrl }}" mode="aspectFill" data-userid="{{ item.senderId }}" />
+        <view class="message" wx:if="{{ item.type === 'text' }}">{{ item.content }}</view>
+        <view class="receiver-gamecard flex flex-row" wx:if="{{ item.type === 'game' }}">
+          <view class="game flex flex-row" bindtap="handleViewGamedetail" data-gameid="{{ item.gameInfo.id }}">
+            <image class="gamecard-image" src="../../images/ic_gamecard.svg" mode="" />
+            <view class="gameinfo flex flex-col">
+              <view class="gameinfo-title mb-15">我邀请了你和我一起打球！不见不散！</view>
+              <view class="flex flex-row gamedetail mb-15">
+                <image src="/images/ic_location.png" class="icon" style="min-width: 32rpx" />
+                <div class="margin-left-xs location">{{ item.gameInfo.location }} (12.3km)</div>
+              </view>
+              <view class="flex flex-row gamedetail">
+                <image src="/images/ic_time.png" class="icon" />
+                <div class="margin-left-xs time">
+                  {{ item.gameInfo.date }} {{ item.gameInfo.dayOfWeek }} {{ item.gameInfo.startTime }}
+                </div>
+                <div class="margin-left-xs time">- {{ item.gameInfo.endTime }}</div>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="own flex" wx:if="{{ item.senderId === senderId }}">
+        <view class="reply" wx:if="{{ item.type === 'text' }}">{{ item.content }}</view>
+        <view class="sender-gamecard flex flex-row" wx:if="{{ item.type === 'game' }}">
+          <view class="game flex flex-row" bindtap="handleViewGamedetail" data-gameid="{{ item.gameInfo.id }}">
+            <image class="gamecard-image" src="../../images/ic_gamecard.svg" mode="" />
+            <view class="gameinfo flex flex-col">
+              <view class="gameinfo-title mb-15">我邀请了你和我一起打球！不见不散！</view>
+              <view class="flex flex-row gamedetail mb-15">
+                <image src="/images/ic_location.png" class="icon" style="min-width: 32rpx" />
+                <div class="margin-left-xs location">{{ item.gameInfo.location }}</div>
+              </view>
+              <view class="flex flex-row gamedetail">
+                <image src="/images/ic_time.png" class="icon" />
+                <div class="margin-left-xs time">
+                  {{ item.gameInfo.date }} {{ item.gameInfo.dayOfWeek }} {{ item.gameInfo.startTime }}
+                </div>
+                <div class="margin-left-xs time">- {{ item.gameInfo.endTime }}</div>
+              </view>
+            </view>
+          </view>
+        </view>
+        <image class="user-img-right" bindtap="handleViewUserInfo" src="{{senderInfo.avatarUrl}}" mode="aspectFill" data-userid="{{ item.senderId }}" />
+      </view>
+      <view class="initiate flex" bindtap="bindTapPost">发起球局</view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="flex">
+      <div>Initiate a friendly chat...</div>
+    </view>
+  </block>
+</view>
+<view class="bottom">
+  <view class="send flex">
+    <input class="send-input" bindinput="onInputMessage" type="text" value="{{inputMessage}}" />
+    <view class="arrow flex" bindtap="bindTapSend">
+      <image class="send-img" src="/images/ic_send.png" mode="" />
+    </view>
+  </view>
+</view>

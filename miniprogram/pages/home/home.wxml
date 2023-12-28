@@ -1,0 +1,12 @@
+<scroll-view class="main">
+  <view class="landing-title flex align-center">
+    <text>Hell</text>
+    <image src="/images/ic_tennis_emoji.png" style="width: 52rpx; height: 52rpx;"></image>
+    <text>,</text>
+  </view>
+  <view wx:if="{{userInfo}}" class="landing-title">{{userInfo.nickname}}</view>
+  <view class="text-gray margin-top-lg">附近的球局</view>
+  <view class="margin-top">
+    <gamelist gameId="{{gameId}}" symbol="allGames"></gamelist>
+  </view>
+</scroll-view>

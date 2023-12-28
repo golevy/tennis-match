@@ -1,0 +1,27 @@
+<toolbar isBack="true">
+  <view slot="backText" class="text-white">意见反馈</view>
+</toolbar>
+<form bindsubmit="handleSubmit">
+  <view class="content">
+    <view class="page-title">您的意见反馈能更好的帮助我们提高“也球”的用户体验</view>
+    <view class="section-title">请选择问题发生的场景 *</view>
+    <view class="problem-list" wx:for="{{ problemList }}" wx:key="index">
+      <view class="problem-item flex flex-row align-center" bindtap="selectProblem" data-text="{{ item.text }}">
+        <image wx:if="{{ selectedProblem === item.text === true }}" class="selection" src="/images/ic_selected.svg"></image>
+        <image wx:else class="selection" src="/images/ic_unselected.svg"></image>
+        <view class="problem-item-text">{{ item.text }}</view>
+      </view>
+    </view>
+    <view class="section-title">问题/建议描述</view>
+    <textarea type="text" placeholder="请填写10个字以上的问题描述以便我们更好的理解您的意见和诉求" class="margin-top-sm textarea" maxlength="60" name="feedbackContent" value="{{ feedbackContent }}" />
+    <button hover-class="none" class="submit-button" form-type="submit">完成</button>
+  </view>
+</form>
+<view class="background" wx:if="{{ !isSuccessed }}">
+  <view class="dialog">
+    <image class="image-dialog" src="/images/ic_success.svg"></image>
+    <view class="dialog-title">反馈成功</view>
+    <view class="dialog-content">感谢您的反馈，我们会尽快处理、修复和完善相关功能</view>
+    <button hover-class="none" class="successed" bindtap="closeDialog">关闭</button>
+  </view>
+</view>

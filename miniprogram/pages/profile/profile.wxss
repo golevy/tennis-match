@@ -1,0 +1,18 @@
+.btns {
+  position: absolute;
+  bottom: 32rpx;
+  left: 0;
+  width: 750rpx;
+  padding: 32rpx 64rpx;
+  align-items: flex-start;
+  gap: 32rpx;
+  background-color: #151515;
+  z-index: 1099;
+}
+.btns .btn {
+  width: 400rpx;
+  padding: 32rpx;
+  border-radius: 56rpx;
+  gap: 32rpx;
+  background: #444;
+}

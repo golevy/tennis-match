@@ -1,0 +1,44 @@
+/* pages/welcome/welcome.wxss */
+
+page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.logo {
+  width: 240rpx;
+  height: 240rpx;
+}
+
+.welcome-container {
+  margin-top: 200rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-text {
+  color: #888888;
+  font-size: 11pt;
+}
+
+.game-button,
+.match-button {
+  border-radius: 9999rpx;
+  padding: 24rpx 48rpx;
+  font-weight: bold;
+}
+
+.game-button {
+  background: #444444;
+  color: white;
+}
+
+.match-button {
+  background: #ddf638;
+  color: black;
+}

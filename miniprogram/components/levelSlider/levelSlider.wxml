@@ -1,0 +1,3 @@
+<van-slider active-color="#DDF638" inactive-color="#888888" bar-height="6px" step="0.5" max="7.0" min="1.0" value="{{tennisLevel === '' ? level : tennisLevel}}" use-button-slot bind:change="onChange" bind:drag="onDrag">
+    <view class="custom-button" slot="button">{{ tennisLevel === '' ? level : tennisLevel }}</view>
+</van-slider>

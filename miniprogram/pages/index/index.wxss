@@ -1,0 +1,54 @@
+/* miniprogram/pages/index/index.wxss */
+
+.tab-container {
+  display: flex;
+  padding-top: 20rpx;
+  padding-left: 50rpx;
+  padding-right: 50rpx;
+  background: #151515;
+  flex: 1;
+}
+
+.tab,
+.tab-highlight {
+  color: #888888;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: width 0.5s;
+  height: 70%;
+  padding: 16rpx 0rpx;
+  transition: all 500ms;
+}
+
+.tab-highlight {
+  color: #ddf638;
+}
+
+.tab-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+.tab-icon {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.post-game {
+  border-radius: 50%;
+  background: #444444;
+  display: flex;
+  padding: 20rpx;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-game-icon {
+  width: 42rpx;
+  height: 42rpx;
+}

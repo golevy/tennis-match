@@ -1,0 +1,26 @@
+<view class="main">
+    <view class="header">消息</view>
+    <view class="message">
+        <block wx:if="{{ messageList.length > 0 }}">
+            <view class="message-list" wx:for="{{ messageList }}" wx:key="index">
+                <view class="userInfo" bindtap="navigateToChatPage" data-id="{{ item.userId }}">
+                    <view class="avatar-zone">
+                        <image class="user-img" src="{{ item.avatar }}" mode="aspectFill" />
+                        <view class="notification" wx:if="{{ item.isNewMessages }}"></view>
+                    </view>
+                    <view class="message-content">
+                        <view class="nickname">{{ item.nickname }}</view>
+                        <view class="content" wx:if="{{ item.messages[0].content }}">
+                            {{ item.messages[0].content }}
+                        </view>
+                        <view class="content" wx:else>[组局活动信息]</view>
+                    </view>
+                    <view class="time">{{ item.messages[0].time }}</view>
+                </view>
+            </view>
+        </block>
+        <block wx:else>
+            <view>这里空空如也，快发起愉快的聊天吧~</view>
+        </block>
+    </view>
+</view>

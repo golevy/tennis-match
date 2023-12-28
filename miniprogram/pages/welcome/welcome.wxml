@@ -1,0 +1,12 @@
+<image class="logo" src="/images/logo.svg"></image>
+<view class="welcome-container">
+  <view class="welcome-text" hover-class="none" hover-stop-propagation="false">欢迎来到 “对头”，你想要</view>
+  <view class="flex margin-top" hover-class="none" hover-stop-propagation="false">
+    <view bindtap="enterApp" data-tab="game" class="game-button" hover-class="none" hover-stop-propagation="false">
+      <text>组局</text>
+    </view>
+    <view bindtap="enterApp" data-tab="match" class="match-button margin-left" hover-class="none" hover-stop-propagation="false">
+      <text>找球友</text>
+    </view>
+  </view>
+</view>

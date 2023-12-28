@@ -1,0 +1,11 @@
+.custom-button{
+  width: 30px;
+  height: 30px;
+  background-color: #DDF638;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	color: #000000;
+	font-weight: 500;
+}

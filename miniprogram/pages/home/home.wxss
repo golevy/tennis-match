@@ -1,0 +1,13 @@
+.main {
+  padding: 100rpx 48rpx 120rpx 48rpx;
+}
+
+.landing-title {
+  font-size: 28pt;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(114.75deg, #ffffff 7.93%, #cce818 32.4%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

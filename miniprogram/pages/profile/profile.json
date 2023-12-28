@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "profile": "/pages/user/profile"
+  },
+  "style-isolation": "apply-shared"
+}

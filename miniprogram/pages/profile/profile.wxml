@@ -1,0 +1,17 @@
+<view class="cu-custom" style="height:{{appBarHeight-statusBarHeight-100}}px;z-index: 999;">
+  <view class="cu-bar fixed {{bgImage!=''?'none-bg text-white bg-img':''}} {{bgColor}}" style="height:{{appBarHeight}}px;padding-top:{{statusBarHeight}}px;{{bgImage?'background-image:url(' + bgImage+')':''}}">
+    <view class="action padding-left-sm" bindtap="backPage">
+      <text class="cuIcon-back text-gray"></text>
+      <text style="font-weight: 400;">约球</text>
+    </view>
+  </view>
+</view>
+<profile userId="{{userId}}"></profile>
+<block wx:if="{{ userId !== selfUserId }}">
+  <view class="flex btns justify-between" hover-class="none" hover-stop-propagation="false">
+    <button hover-class="none" style="background-color: #DDF638;gap: 10rpx" class="btn flex justify-center align-center" bindtap="handleContactPerson">
+      <image style="width: 48rpx;height: 48rpx;" src="/images/ic_chat.svg" mode="aspectFit" />
+      <text>约球</text>
+    </button>
+  </view>
+</block>

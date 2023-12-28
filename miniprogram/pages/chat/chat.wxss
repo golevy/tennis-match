@@ -1,0 +1,166 @@
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content .main {
+  width: 100%;
+  margin-top: 60rpx;
+}
+.content .main .other {
+  position: relative;
+  justify-content: left;
+  margin-bottom: 55rpx;
+}
+.content .main .other .user-img-left {
+  position: absolute;
+  left: 40rpx;
+  top: 0;
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 92rpx;
+}
+.content .main .other .message {
+  padding: 20rpx;
+  margin-top: 10rpx;
+  margin-left: 140rpx;
+  margin-right: 40rpx;
+  color: #fff;
+  font-size: 26rpx;
+  font-weight: 400;
+  border-radius: 0rpx 46rpx 46rpx 44rpx;
+  background: #282828;
+  word-break: break-all;
+  word-wrap: break-word;
+  z-index: 99;
+}
+.content .main .other .receiver-gamecard {
+  margin-left: 140rpx;
+  border-radius: 20rpx;
+  background: #272727;
+}
+.content .main .own {
+  position: relative;
+  justify-content: flex-end;
+  margin-bottom: 55rpx;
+}
+.content .main .own .user-img-right {
+  position: absolute;
+  right: 40rpx;
+  top: 0;
+  width: 90rpx;
+  height: 90rpx;
+  margin-left: 15rpx;
+  border-radius: 92rpx;
+}
+.content .main .own .reply {
+  padding: 20rpx;
+  margin-top: 10rpx;
+  margin-right: 140rpx;
+  margin-left: 40rpx;
+  color: #000;
+  font-size: 26rpx;
+  font-weight: 400;
+  border-radius: 46rpx 0rpx 46rpx 46rpx;
+  background: #ddf638;
+  word-break: break-all;
+  word-wrap: break-word;
+  z-index: 99;
+}
+.content .main .own .sender-gamecard {
+  margin-right: 140rpx;
+  border-radius: 20rpx;
+  background: #272727;
+}
+.content .main .initiate {
+  position: fixed;
+  bottom: 180rpx;
+  left: 262rpx;
+  width: 230rpx;
+  height: 90rpx;
+  border-radius: 58rpx;
+  background: #ddf638;
+  z-index: 199;
+}
+.content .main:last-child {
+  padding-bottom: 300rpx;
+}
+.card {
+  padding: 20rpx 48rpx 120rpx 48rpx;
+  margin-right: 100rpx;
+}
+.game {
+  height: 220rpx;
+}
+.game .gamecard-image {
+  width: 165rpx;
+  height: 165rpx;
+  margin-right: 28rpx;
+  margin-left: 28rpx;
+}
+.game .gameinfo {
+  width: 350rpx;
+  height: 165rpx;
+}
+.game .gameinfo .gameinfo-title {
+  color: #ababab;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.game .gameinfo .gamedetail {
+  width: 350rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-content: left;
+}
+.game .gameinfo .gamedetail .location {
+  width: 290rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 150rpx;
+  background-color: #151515;
+  z-index: 999;
+}
+.bottom .send-input {
+  width: 580rpx;
+  height: 90rpx;
+  padding-left: 40rpx;
+  color: #fff;
+  font-size: 26rpx;
+}
+.bottom .send {
+  position: fixed;
+  bottom: 60rpx;
+  width: 660rpx;
+  height: 90rpx;
+  margin-left: 50rpx;
+  border-radius: 48rpx;
+  background: #393939;
+}
+.bottom .send .arrow {
+  height: 100%;
+  width: 100rpx;
+}
+.bottom .send .arrow .send-img {
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 10rpx;
+}
+.icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+.location,
+.time {
+  font-size: 20rpx;
+  color: #888888;
+}
+.mb-15 {
+  margin-bottom: 15rpx;
+}

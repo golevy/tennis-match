@@ -1,0 +1,75 @@
+<view class="main flex flex-col">
+  <view class="flex align-center">
+    <text class="title">约球</text>
+    <image style="width: 80rpx; height: 80rpx;" src="../../images/ic_sports-tennis_active.svg"></image>
+  </view>
+  <!-- <block>
+    <view class="blank-box container justify-center" hidden="{{ true }}">
+      <image style="width: 280rpx; height: 280rpx;" src="../../images/ic_wait_time.png"></image>
+      <text class="headline margin-top-sm">这里静悄悄</text>
+      <text class="sub-headline margin-top-sm">小伙伴们还没有来，不妨先尝试自己创建新球</text>
+      <text class="sub-headline">局，静静等待其他伙伴的加入！</text>
+      <button bindtap="postGame" class="postGame margin-top-lg">
+        <text style="font-size: 24px;" class="cuIcon-add"></text>
+        <text>发起球局</text>
+      </button>
+    </view>
+  </block> -->
+  <block wx:if="{{ !isLocationAuthenticated }}">
+    <button bindtap="handleLocationAuth" class="button-none-location">
+      <text>授权获取定位</text>
+    </button>
+  </block>
+  <block wx:else>
+    <scroll-view scroll-y="true" style="height: 100%;" bindscrolltolower="loadMore" lower-threshold="300">
+      <view>
+        <view class="text-gray margin-top-xl">附近的球友</view>
+        <view class="explore-card-list flex margin-top margin-bottom">
+          <block wx:if="{{!loading}}">
+            <view data-index="{{index}}" style="transition: all .5s; animation-delay: {{(index+1)*0.1}}s;" class="explore-card margin-bottom-lg {{handleDelay?'animation-slide-bottom':''}}" wx:for="{{matchedUsers}}" wx:key="index" bindtap="handleViewInfo">
+              <view class="level align-center">NTRP {{item.level}}</view>
+              <view class="location">
+                <text class="cuIcon-locationfill icon"></text>
+                <text>{{ item.formattedDistance }}</text>
+              </view>
+              <image class="avatar" mode="aspectFill" lazy-load="false" src="{{item.avatarUrl}}"></image>
+              <view class="info">
+                <view class="user-info flex align-center">
+                  <view class="nickname margin-right-xxs">{{item.nickname}}</view>
+                  <image wx:if="{{item.gender === 'male'}}" class="little-icon" src="../../images/ic_marker_male.png"></image>
+                  <image wx:else class="little-icon" src="../../images/ic_marker_female.png"></image>
+                </view>
+                <!-- Available Time -->
+                <view class="tennis-time margin-top-xs flex align-center">
+                  <image class="little-icon margin-right-xxs" src="../../images/ic_time_white.svg"></image>
+                  <view class="box flex align-center">
+                    <view class="content" wx:if="{{ item.availableWorkday && item.workdayAvailability && item.availableWeekend && item.weekendAvailability }}">
+                      {{item.availableWorkday}}{{item.workdayAvailability}}，{{item.availableWeekend}}{{item.weekendAvailability}}
+                    </view>
+                    <view class="content" wx:elif="{{ item.availableWorkday && item.workdayAvailability }}">
+                      {{item.availableWorkday}}{{item.workdayAvailability}}
+                    </view>
+                    <view class="content" wx:elif="{{ item.availableWeekend && item.weekendAvailability }}">
+                      {{item.availableWeekend}}{{item.weekendAvailability}}
+                    </view>
+                    <view class="content" wx:else>用户未选择</view>
+                  </view>
+                </view>
+                <view class="isplayed margin-top-xs flex align-center">
+                  <image class="little-icon margin-right-xxs" src="../../images/ic_residence.svg"></image>
+                  <view class="isplayed" wx:if="{{ item.residence }}">{{ item.residence }}</view>
+                  <view class="isplayed" wx:else>用户暂未填写</view>
+                </view>
+              </view>
+              <view class="mask"></view>
+            </view>
+          </block>
+          <view wx:else style="width: 100%; height: 100%;" class="box flex align-center justify-center">
+            <span class="loader"></span>
+          </view>
+        </view>
+        <view wx:if="{{noMoreData}}" style="text-align: center; padding: 20rpx;">没有更多数据了</view>
+      </view>
+    </scroll-view>
+  </block>
+</view>

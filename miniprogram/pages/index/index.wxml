@@ -1,0 +1,35 @@
+<view class="flex flex-col" hover-class="none" hover-stop-propagation="false">
+  <view>
+    <home gameId="{{gameId}}" wx:if="{{currentTab === 'home'}}" />
+    <user from="personal" wx:if="{{currentTab === 'user'}}" />
+    <explore wx:if="{{currentTab === 'explore' && matchFeatureEnabled}}" />
+    <message wx:if="{{currentTab === 'message' && messageFeatureEnabled}}" />
+    <privacy></privacy>
+  </view>
+  <!-- Bottom tab -->
+  <view class="cu-bar foot tab-container" style="padding-bottom: {{navigationBarHeight > 0 ? (navigationBarHeight + 8) : 20}}rpx;">
+    <view bindtap="onTabSelect" class="{{currentTab === 'home' ? 'tab-highlight' : 'tab'}} flex" data-tabid="home">
+      <image class="tab-icon" wx:if="{{currentTab === 'home'}}" src="/images/ic_tennisball_active.png" />
+      <image class="tab-icon" wx:else src="/images/ic_tennisball.png" mode="" />
+      <view class="margin-left-xs tab-text">组局</view>
+    </view>
+    <view wx:if="{{matchFeatureEnabled}}" bindtap="onTabSelect" class="{{currentTab === 'explore' ? 'tab-highlight' : 'tab'}} flex" data-tabid="explore">
+      <image class="tab-icon" wx:if="{{currentTab === 'explore'}}" src="/images/ic_explore_active.png" />
+      <image class="tab-icon" wx:else src="/images/ic_explore.png" />
+      <view class="margin-left-xs tab-text">约球</view>
+    </view>
+    <view wx:if="{{matchFeatureEnabled}}" bindtap="handlePostGame" class="post-game">
+      <image class="post-game-icon" src="/images/ic_plus.png" />
+    </view>
+    <view wx:if="{{messageFeatureEnabled}}" bindtap="onTabSelect" class="{{currentTab === 'message' ? 'tab-highlight' : 'tab'}} flex" data-tabid="message">
+      <image class="tab-icon" wx:if="{{currentTab === 'message'}}" src="/images/ic_message_active.png" />
+      <image class="tab-icon" wx:else src="/images/ic_message.png" />
+      <view class="margin-left-xs tab-text">消息</view>
+    </view>
+    <view bindtap="onTabSelect" class="{{currentTab === 'user' ? 'tab-highlight' : 'tab'}} flex" data-tabid="user">
+      <image class="tab-icon" wx:if="{{currentTab === 'user'}}" src="/images/ic_user_active.png" />
+      <image class="tab-icon" wx:else src="/images/ic_user.png" />
+      <view class="margin-left-xs tab-text">用户</view>
+    </view>
+  </view>
+</view>

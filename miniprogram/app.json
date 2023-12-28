@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/postGame/postGame",
+    "pages/user/profilesettings/profilesettings",
+    "pages/welcome/welcome",
+    "pages/profile/profile",
+    "pages/chat/chat",
+    "pages/userGames/userGames",
+    "pages/exploredetail/exploredetail",
+    "pages/feedback/feedback",
+    "pages/share/share"
+  ],
+  "window": {
+    "backgroundColor": "#151515",
+    "backgroundTextStyle": "light",
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom"
+  },
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "toolbar": "/components/toolbar/toolbar",
+    "van-slider": "/components/vant/weapp/slider/index",
+    "levelSlider": "/components/levelSlider/levelSlider",
+    "van-dialog": "../miniprogram_npm/@vant/weapp/dialog/index"
+  },
+  "permission": {
+    "scope.userFuzzyLocation": {
+      "desc": "你的位置信息将用于获取附近的球友" 
+    }
+  },
+  "requiredPrivateInfos": [
+    "getFuzzyLocation",
+    "chooseLocation"
+  ],
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

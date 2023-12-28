@@ -1,0 +1,87 @@
+<block wx:if="{{!isLoading}}">
+  <toolbar isBack="true">
+    <view wx:if="{{flag === false}}" slot="backText" class="text-white">发起球局</view>
+    <view wx:else slot="backText" class="text-white">修改球局</view>
+  </toolbar>
+  <view class="container">
+    <form class="main" bindsubmit="handleSubmit">
+      <!-- Participants -->
+      <view class="title">最大参与人数*</view>
+      <view class="flex align-center margin-top-sm text-gray">
+        <input class="inp input-placeholder" type="number" value="{{maxParticipantCount}}" name="maxParticipantCount" />
+        <text class="margin-left-xs">人</text>
+        <view bindtap="onMaxParticipantCountChoose" data-count="2" class="choice-container margin-left-sm">
+          单打(2人)
+        </view>
+        <view bindtap="onMaxParticipantCountChoose" data-count="4" class="choice-container margin-left-sm">
+          双打(4人)
+        </view>
+      </view>
+      <!-- Location -->
+      <view class="title margin-top-xl">场地*</view>
+      <view class="flex align-center margin-top-sm">
+        <input name="locationName" type="text" class="inp" value="{{location.name}}"></input>
+        <view class="text-sm text-grey margin-left" bindtap="chooseLocation">
+          <text class="cuIcon-locationfill margin-right-xs"></text>
+          地图选点
+        </view>
+      </view>
+      <view class="text-sm text-grey">{{location.address}}</view>
+      <!-- Time -->
+      <view class="title margin-top-xl">时间*</view>
+      <view class="flex align-center margin-top-xs">
+        <view class="text-xs text-grey text-bold">从</view>
+        <view class="picker margin-left-xs">
+          <picker mode="date" bindchange="onStartDatePicked">
+            <view>{{startDateStr}}</view>
+          </picker>
+        </view>
+        <view class="picker margin-left-xs flex">
+          <picker mode="time" bindchange="onStartTimePicked">
+            <view>{{startTimeStr}}</view>
+          </picker>
+        </view>
+        <view class="text-xs text-grey text-bold margin-left">到</view>
+        <view class="picker margin-left-xs">
+          <picker mode="date" bindchange="onEndDatePicked">
+            <view>{{endDateStr}}</view>
+          </picker>
+        </view>
+        <view class="picker margin-left-xs">
+          <picker mode="time" bindchange="onEndTimePicked">
+            <view>{{endTimeStr}}</view>
+          </picker>
+        </view>
+      </view>
+      <!-- Level -->
+      <view class="title margin-top-xl margin-bottom-xl">网球等级（1.0-7.0）*</view>
+      <levelSlider tennisLevel="{{level}}" bind:levelChange="handleLevelChange"></levelSlider>
+      <!-- Note -->
+      <view class="title margin-top-xl">备注</view>
+      <textarea name="note" class="note-input margin-top-xs" value="{{note}}"></textarea>
+      <view class="margin-bottom-sm margin-top">
+        <view class="QR_code text-df text-bold">群二维码</view>
+      </view>
+      <view class="grid col-4 grid-square flex-sub">
+        <view wx:if="{{fileID !== ''}}" class="img-box">
+          <image class="img-code margin-right-sm" src="{{fileID}}" mode="aspectFill"></image>
+          <view class="cu-tag bg-red" catchtap="deleteImg">
+            <text class="cuIcon-close"></text>
+          </view>
+        </view>
+        <view wx:else bindtap="ChooseImage">
+          <text class="cuIcon-cameraadd"></text>
+        </view>
+      </view>
+      <view class="flex justify-end margin-top">
+        <button wx:if="{{flag === false}}" class="submit-button" form-type="submit">创建球局</button>
+        <button wx:else class="submit-button" form-type="submit">修改球局</button>
+      </view>
+    </form>
+  </view>
+</block>
+<block wx:else>
+  <view style="width: 100%; height: 100%;" class="flex align-center justify-center">
+    <span class="loading"></span>
+  </view>
+</block>

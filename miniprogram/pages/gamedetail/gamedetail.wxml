@@ -1,0 +1,72 @@
+<view class="container">
+  <block wx:if="{{!isLoading}}">
+    <view class="main">
+      <view class="title single-line" style="text-align: left;">
+        {{game.dayOfWeek}}, {{game.location.name}}
+      </view>
+      <view class="flex margin-top">
+        <image src="/images/ic_location.png" class="icon" style="min-width: 32rpx" />
+        <view class="margin-left-xs location" style="text-align: left;">
+          {{game.location.name}}
+        </view>
+      </view>
+      <view class="flex margin-top-xs">
+        <image src="/images/ic_time.png" class="icon" />
+        <text class="margin-left-xs time">{{game.dayOfWeek}} {{game.startDateStr}}</text>
+        <text class="margin-left-xs time">- {{game.endDateStr}}</text>
+      </view>
+      <view class="flex margin-top-xs">
+        <image src="/images/ic_level.png" class="icon" />
+        <text class="margin-left-xs level">Level {{game.level}}+</text>
+      </view>
+      <view class="section-title margin-top-xl" style="text-align: left;">备注</view>
+      <view class="note" style="text-align: left;">{{game.note}}</view>
+      <view class="section-title margin-top-xl" style="text-align: left;">参与者</view>
+      <view class="flex margin-top-sm align-center">
+        <view class="flex flex-col align-center justify-center margin-right-sm" wx:for="{{game.participants}}" wx:key="_id">
+          <image bindtap="handleAvatarClick" data-id="{{item._id}}" src="{{item.avatarUrl}}" class="participantAvatar" mode="aspectFill" />
+          <text class="hostTag margin-top-xs">{{index === 0 ? '发起者' : ''}}</text>
+        </view>
+        <view class="flex align-end" hover-class="none" hover-stop-propagation="false">
+          <view class="participantCount margin-left-sm">{{game.participants.length}}</view>
+          <view class="maxParticipantCount margin-bottom-xs">/{{game.maxParticipantCount}}</view>
+        </view>
+      </view>
+      <view class="flex {{game.chatCode ? 'justify-between' : 'justify-end'}} margin-top">
+        <text bindtap="showModal" data-target="Image" wx:if="{{game.chatCode}}" class="showImg text-xs text-center flex align-center">
+          显示群二维码
+        </text>
+        <view class="cu-modal {{modalName=='Image'?'show':''}}">
+          <view class="cu-dialog">
+            <image src="{{game.chatCode}}" class="bg-img" mode="aspectFit"></image>
+            <view class="cu-bar bg-white">
+              <view class="action margin-0 flex-sub  solid-left" bindtap="hideModal">我知道了</view>
+            </view>
+          </view>
+        </view>
+        <view class="flex justify-end">
+          <button class="clear-button share-button" open-type="share">
+            <text class="cuIcon-share"></text>
+            <text>分享</text>
+          </button>
+          <view wx:if="{{!isLoadingUserInfo}}">
+            <view wx:if="{{!isJoined && game}}" bindtap="handleJoin" class="join-button margin-left-sm">
+              <text>申请加入</text>
+            </view>
+            <view wx:if="{{isOrganizer}}" bindtap="handleEdit" class="join-button margin-left-sm">
+              <text>编辑</text>
+            </view>
+            <view wx:if="{{isJoined && !isOrganizer}}" bindtap="handleCancel" class="cancel-button margin-left-sm">
+              <text>鸽了</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view style="width: 100%; height: 100%;" class="box flex align-center justify-center">
+      <span class="loading"></span>
+    </view>
+  </block>
+</view>

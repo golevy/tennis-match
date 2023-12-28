@@ -1,0 +1,4 @@
+<toolbar isBack="true"></toolbar>
+<view class="main" wx:if="{{symbol !== ''}}">
+  <gamelist symbol="{{symbol}}"></gamelist>
+</view>
